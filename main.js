@@ -55,6 +55,41 @@ class MainScene extends Phaser.Scene {
       }
     });
 }
+  // Method to check for collisions to run on cycling
+  checkForCollision() {
+    // Get player's bounding box
+    let playerXStart = this.player.x;
+    let playerYStart = this.player.y;
+    let playerXEnd = this.player.x + 75; 
+    let playerYEnd = this.player.y + 75;
+
+    // Traverse rendered obstacles
+    for (let i = 0; i < this.obstacles.length; i++) {
+      let currObstacle = this.obstacles[i];
+
+      // Get obstacle's bounding box
+      let obstacleXStart = currObstacle.x;
+      let obstacleYStart = currObstacle.y;
+      let obstacleXEnd = currObstacle.x + currObstacle.width;
+      let obstacleYEnd = currObstacle.y + currObstacle.height;
+
+      // Check for collision using Axis-Aligned Bounding Box
+      if (
+        playerXStart < obstacleXEnd && // Player's left edge is before obstacle's right edge
+        playerXEnd > obstacleXStart && // Player's right edge is after obstacle's left edge
+        playerYStart < obstacleYEnd && // Player's top edge is above obstacle's bottom edge
+        playerYEnd > obstacleYStart    // Player's bottom edge is below obstacle's top edge
+      ) {
+        // Collision detected
+        console.log("Collision detected with obstacle:", currObstacle);
+        
+        // Handle Collision Here
+
+        return true;
+      }
+    }
+    return false;
+  }
 
   // This will check the typed word and move the player if there's a match
   handleInput(text, time, delta) {
@@ -123,6 +158,8 @@ class MainScene extends Phaser.Scene {
     */
     this.obstacle = new Obstacle(this, "Left")
   }
+
+
 }
 
 // Configuration for the Phaser game
