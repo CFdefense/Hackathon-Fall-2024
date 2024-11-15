@@ -59,10 +59,14 @@ class MainScene extends Phaser.Scene {
     backgroundMusic.play()
     this.correctNoise = this.sound.add("ding", { loop: false });
     this.wrongNoise = this.sound.add("wrong", { loop: false });
-    // backgroundMusic.play();
 
     // Create an instance of the RedSquare class
     this.player = new Player(this, 365, 400);
+
+    this.obstacles = [];
+    this.obstaclePos = ["Left", "Middle", "Right"];
+    this.obstacleInterval = 10000;
+    this.lastObsTime = 0;
 
     // load the wordbank
     const fileContent = this.cache.text.get('wordBankFile');
@@ -192,7 +196,14 @@ class MainScene extends Phaser.Scene {
       maybe decrease timer as game goes on
       game must always be possible to survive
     */
-    this.obstacle = new Obstacle(this, "Left")
+
+    let currentTime = Date.now();
+    if (currentTime - this.lastObsTime >= this.obstacleInterval) {
+      let newPos = this.obstaclePos[Math.floor(Math.random() * this.obstaclePos.length)];
+      console.log("New Obstacle in Pos: " + newPos)
+      this.lastObsTime = currentTime;
+      this.obstacles.push(new Obstacle(this, newPos));
+    }
   }
 }
 
