@@ -55,39 +55,54 @@ class MainScene extends Phaser.Scene {
   // This will check the typed word and move the player if there's a match
   handleInput(text, time, delta) {
     let correct = this.sound.add("ding", { loop: false });
-    const typedWord = text.trim(); // trimming to avoid extra spaces
+    const typedWord = text.trim();
     if (!typedWord) {
         console.log("No word entered");
         return;
     }
- 
+    
     // Check if the typed word matches any of the available words
     if (this.leftWord.checkMatch(typedWord)) {
-        console.log("left true");
-        correct.play();
-        // replace it with a new word
-        this.leftWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
-
         // Lets attempt to update the players location and find if it moved
-        this.player.update(time, delta, "left");
+        result = this.player.update(time, delta, "left");
+
+        if (result === true) {
+          console.log("left true");
+          correct.play();
+
+          // replace it with a new word
+          this.leftWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+        } else {
+          console.log("Wrong")
+        }
     } else if (this.middleWord.checkMatch(typedWord)) {
+      // Lets attempt to update the players location and find if it moved
+      result = this.player.update(time, delta, "middle");
+      
+      if (result === true) {
         console.log("middle true");
         correct.play();
-
+        
+        // replace it with a new word
         this.middleWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
-
-        // Lets attempt to update the players location and find if it moved
-        this.player.update(time, delta, "middle");
+      } else {
+        console.log("Wrong")
+      }
     } else if (this.rightWord.checkMatch(typedWord)) {
+      // Lets attempt to update the players location and find if it moved
+      result = this.player.update(time, delta, "right");
+
+      if (result === true) {
         console.log("right true");
         correct.play();
 
+        // replace it with a new word
         this.rightWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
-
-        // Lets attempt to update the players location and find if it moved
-        this.player.update(time, delta, "right");
-    } else {
+      } else {
         console.log("Wrong")
+      }
+    } else {
+      console.log("Wrong")
     }
   }
 

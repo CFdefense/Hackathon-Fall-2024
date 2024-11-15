@@ -156,10 +156,7 @@ export class Word {
       resolution: 1,
     });
   }
-
-  updateWord() {
-    
-  }
+  
   // Method to check an input text to the words text
   checkMatch(inputText) {
     return this.initialText.toLowerCase() === inputText.toLowerCase();
@@ -168,6 +165,7 @@ export class Word {
   // Method to update the word's content and position
   update(newText, xOffset = 10, yOffset = 10) {
     // Update the text inside the rectangle
+    this.initialText = newText.trim(); // Trim spaces
     this.text.setText(newText);
 
     // Update text position to keep it inside the rectangle
