@@ -1,13 +1,10 @@
-Implement Home screen w scoreboard and start game options
+1. Updating words -> use word bank
+2. Obstacle rendering and collision detection
+3. Make it look pretty
 
-Implement typing logic
+extra
 
-Implement rendering logic of enemies
-
-Implement collision logic
-
-Implement Score keeping logic
-
-Implement displaying of words to type logic
-
-Implement moving based off of typed words logic
+Main menu
+    Play
+    Add words
+    Leaderboard

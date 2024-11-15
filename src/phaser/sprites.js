@@ -157,6 +157,9 @@ export class Word {
     });
   }
 
+  updateWord() {
+    
+  }
   // Method to check an input text to the words text
   checkMatch(inputText) {
     return this.initialText.toLowerCase() === inputText.toLowerCase();

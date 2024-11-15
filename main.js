@@ -30,7 +30,7 @@ class MainScene extends Phaser.Scene {
     this.inputBox.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         this.handleInput(this.inputBox.value)
-        this.inputBox.value = "";
+        this.inputBox.value = ""; //! Not working
       }
     });
 }
@@ -61,9 +61,8 @@ class MainScene extends Phaser.Scene {
         result = this.player.update(time, delta, "right");
     }
 
-    // Do a check on result to see if we moved and then call update on word guessed
-
-
+    // ! Do a check on result to see if we moved and then call update on word guessed
+    // ! define some sort mechanision to find a new word 
     
   }
 
