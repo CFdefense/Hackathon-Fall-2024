@@ -22,6 +22,49 @@ class MainScene extends Phaser.Scene {
     this.leftWord = new Word(this, 75, 0, 100, 40, "leftWord");
     this.middleWord = new Word(this, 355, 0, 100, 40, "middleWord");
     this.rightWord = new Word(this, 600, 0, 100, 40, "rightWord");
+
+    // Capture the input from the text box
+    this.inputBox = document.querySelector('.text-box');
+    
+    // Use an arrow function to ensure 'this' is correctly scoped
+    this.inputBox.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        this.handleInput(this.inputBox.value)
+        this.inputBox.value = "";
+      }
+    });
+}
+
+  // This will check the typed word and move the player if there's a match
+  handleInput(text, time, delta) {
+    const typedWord = text.trim(); // trimming to avoid extra spaces
+    if (!typedWord) {
+        console.log("No word entered");
+        return;
+    }
+
+    // Check if the typed word matches any of the available words
+    if (this.leftWord.checkMatch(typedWord)) {
+        console.log("left true");
+
+        // Lets attempt to update the players location and find if it moved
+        result = this.player.update(time, delta, "left");
+    } else if (this.middleWord.checkMatch(typedWord)) {
+        console.log("middle true");
+
+        // Lets attempt to update the players location and find if it moved
+        result = this.player.update(time, delta, "middle");
+    } else if (this.rightWord.checkMatch(typedWord)) {
+        console.log("right true");
+
+        // Lets attempt to update the players location and find if it moved
+        result = this.player.update(time, delta, "right");
+    }
+
+    // Do a check on result to see if we moved and then call update on word guessed
+
+
+    
   }
 
   // For game cycle
@@ -29,19 +72,11 @@ class MainScene extends Phaser.Scene {
     // Implement logic in here for game functionality
 
     /* 
-      Obstacle logic goes here
+      Obstacle Logic Goes Here
       need to have some set timer before an obstacle will spawn again
       maybe decrease timer as game goes on
       game must always be possible to survive
     */
-
-    /*
-      Ill use arrow keys for temporary demonstration of functionality
-      will need to be changed to look to see if a correct word has been typed to move a set distance
-    */ 
-    if (this.player) {
-      this.player.update(time, delta);
-    }
   }
 }
 

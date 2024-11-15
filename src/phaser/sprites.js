@@ -6,6 +6,7 @@ export class Player {
     this.y = y;
     this.width = 75; 
     this.height = 75;
+    this.position = "middle"; // flag for current position
 
     // Players Design
     this.scene = scene;
@@ -21,21 +22,35 @@ export class Player {
     this.keyDown = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
   }
 
-  update(time, delta) {
-    const moveDistance = 1
+  update(time, delta, direction) {
+    let newXPos = this.x;
+    let newDirection = null; // Flag to be returned to tell Game whether or not to update the word
+    switch(direction) {
+      case "left":
+        // Can only go left if in the middle 
+        if (this.position === "middle") {
+          newXPos = 291;
+          this.position = "left";
+          newDirection = true;
+        }
+        break;
+      case "right":
+        // Can only go right if in the middle
+        if (this.position === "middle") {
+          newXPos = 441;
+          this.position = "right";
+          newDirection = true;
+        }
+        break;
+      case "middle":
+        // Can go middle from anywhere
+        newXPos = 365;
+        this.position = "middle";
+        newDirection = true;
+        break;
+    }
 
-    // Handle movement with arrow keys
-    if (this.keyLeft.isDown) {
-      this.x -= moveDistance; // Move left
-    } else if (this.keyRight.isDown) {
-      this.x += moveDistance; // Move right
-    }
-    
-    if (this.keyUp.isDown) {
-      this.y -= moveDistance; // Move up
-    } else if (this.keyDown.isDown) {
-      this.y += moveDistance; // Move down
-    }
+    this.x = newXPos;
 
     // Clear the previous graphics before redrawing
     this.graphics.clear();
@@ -45,17 +60,34 @@ export class Player {
 
     // Redraw the player at the new position
     this.graphics.fillRect(this.x, this.y, this.width, this.height);
+
+    return newDirection
   }
 }
 
 // Obstacle Sprite
 export class Obstacle {
-  constructor(scene, x, y) {
+  constructor(scene, newPosition) {
     // Obstacle Properties
-    this.x = x;
-    this.y = y;
     this.width = 75; 
     this.height = 75;
+    this.position = newPosition; // flag for current position
+
+    // Set current x and y based on position
+    switch(newPosition) {
+      case "Left":
+        this.x = 291;
+        this.y = 75;
+        break;
+      case "Middle":
+        this.x = 365;
+        this.y = 75;
+        break;
+      case "Right":
+        this.x = 441;
+        this.y = 75;
+        break;
+    }
 
     // Obstacle Design
     this.scene = scene;
@@ -84,7 +116,7 @@ export class Obstacle {
 export class gameWindow {
   constructor(scene, x, y) {
     this.scene = scene; // Reference to the Phaser scene
-    this.graphics = scene.add.graphics(); // Create a graphics object\
+    this.graphics = scene.add.graphics(); // Create a graphics object
 
     const width = 225; // Fixed width
     const height = 400; // Fixed height
@@ -123,6 +155,11 @@ export class Word {
       fill: '#00000',
       resolution: 1,
     });
+  }
+
+  // Method to check an input text to the words text
+  checkMatch(inputText) {
+    return this.initialText.toLowerCase() === inputText.toLowerCase();
   }
 
   // Method to update the word's content and position
