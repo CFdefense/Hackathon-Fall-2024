@@ -23,7 +23,7 @@ class MenuScene extends Phaser.Scene {
     video.play(true); // Play the video and loop it
 
     // Add a "Start Game" button
-    const startButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'startButton')
+    const startButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 100, 'startButton')
       .setInteractive() // Make the button interactive
       .setScale(.5)
       .on('pointerdown', () => {
