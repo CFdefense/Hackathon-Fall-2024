@@ -14,12 +14,6 @@ export class Player {
     this.graphics.fillStyle(0xff0000, 1); 
     this.graphics.fillRect(x, y, this.width, this.height);
     this.scene.add.existing(this.graphics);
-
-    // Add key events
-    this.keyLeft = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-    this.keyRight = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-    this.keyUp = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-    this.keyDown = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
   }
 
   update(time, delta, direction) {

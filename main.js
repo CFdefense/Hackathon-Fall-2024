@@ -43,6 +43,7 @@ class MainScene extends Phaser.Scene {
     this.load.audio("background", ["resources/jazz-beat.mp3"]); 
     this.load.audio("ding", ["resources/ding.mp3"]);
     this.load.audio("wrong", ["resources/wrong.mp3"]);
+    this.load.audio("death", ["resources/death.mp3"])
   }
 
   // Creating our Initial Display
@@ -59,6 +60,7 @@ class MainScene extends Phaser.Scene {
     backgroundMusic.play()
     this.correctNoise = this.sound.add("ding", { loop: false });
     this.wrongNoise = this.sound.add("wrong", { loop: false });
+    this.gameOverSound = this.sound.add("death",  { volume: 0.09 }, { loop: false });
 
     // Create an instance of the RedSquare class
     this.player = new Player(this, 365, 400);
@@ -123,6 +125,7 @@ class MainScene extends Phaser.Scene {
         console.log("Collision detected with obstacle:", currObstacle);
         
         // Handle Collision Here
+        this.gameOverSound.play();
         alert("GAME OVER");
         this.scene.start('MenuScene'); // go to mainmenu
         
