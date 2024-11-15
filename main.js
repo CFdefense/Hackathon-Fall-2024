@@ -8,14 +8,19 @@ class MenuScene extends Phaser.Scene {
 
   preload() {
     // Preload assets for the menu (e.g., background, buttons)
-    this.load.image('menuBackground', 'resources/menu-background.png');
+    this.load.video('menuBackgroundVideo', 'resources/background-video.mp4', 'loadeddata', false, true);
     this.load.image('startButton', 'resources/start-button.png');
   }
 
   create() {
+    const typingElement = document.querySelector('.typing-element');
+    typingElement.classList.add('hidden');
     // Add a background image
-    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'menuBackground')
-      .setOrigin(0.5);
+    // Add the video as the background
+    const video = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'menuBackgroundVideo');
+    video.setOrigin(0.5);
+    video.setScale(2); // Optional: Scale the video
+    video.play(true); // Play the video and loop it
 
     // Add a "Start Game" button
     const startButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'startButton')
@@ -42,6 +47,10 @@ class MainScene extends Phaser.Scene {
 
   // Creating our Initial Display
   create() {
+    // Show the input element when entering the main game
+    const typingElement = document.querySelector('.typing-element');
+    typingElement.classList.remove('hidden');
+
     // Create main game display
     new gameWindow(this, window.innerWidth / 3.3, 75);
 
@@ -110,6 +119,7 @@ class MainScene extends Phaser.Scene {
         console.log("Collision detected with obstacle:", currObstacle);
         
         // Handle Collision Here
+        this.scene.start('MainScene'); // go to mainmenu
 
         return true;
       }

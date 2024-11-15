@@ -38,3 +38,7 @@
     box-shadow: 0 4px 12px rgba(255, 111, 97, 0.3);
     background-color: #fff2e6;
 }
+
+.hidden {
+    display: none;
+}
