@@ -93,7 +93,7 @@ export class Obstacle {
     this.scene = scene;
     this.graphics = scene.add.graphics(); 
     this.graphics.fillStyle(0x0000, 1); 
-    this.graphics.fillRect(x, y, this.width, this.height);
+    this.graphics.fillRect(this.x, this.y, this.width, this.height);
     this.scene.add.existing(this.graphics);
   }
 

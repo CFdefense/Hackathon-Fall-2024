@@ -121,6 +121,7 @@ class MainScene extends Phaser.Scene {
       maybe decrease timer as game goes on
       game must always be possible to survive
     */
+    this.obstacle = new Obstacle(this, "Left")
   }
 }
 
