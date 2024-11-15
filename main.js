@@ -20,18 +20,18 @@ class MainScene extends Phaser.Scene {
     this.player = new Player(this, 365, 400);
 
     // load the wordbank
-    let wordBank = []
     const fileContent = this.cache.text.get('wordBankFile');
     const lines = fileContent.split('\n').map(line => line.trim());
     lines.forEach(line => {
-      const newWords = line.split(',');
+      const newWords = line.split(',').map(word => word.trim());
       wordBank = wordBank.concat(newWords);
     });
+    console.log("Word Bank: " + wordBank);
 
     // Create instances of words
-    this.leftWord = new Word(this, 75, 0, 100, 40, "leftWord");
-    this.middleWord = new Word(this, 355, 0, 100, 40, "middleWord");
-    this.rightWord = new Word(this, 600, 0, 100, 40, "rightWord");
+    this.leftWord = new Word(this, 75, 0, 100, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
+    this.middleWord = new Word(this, 355, 0, 100, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
+    this.rightWord = new Word(this, 600, 0, 100, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
     
     // Capture the input from the text box
     this.inputBox = document.querySelector('.text-box');
@@ -39,8 +39,9 @@ class MainScene extends Phaser.Scene {
     // Use an arrow function to ensure 'this' is correctly scoped
     this.inputBox.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
-        this.handleInput(this.inputBox.value)
-        this.inputBox.value = ""; //! Not working
+        console.log("User: " + this.inputBox.value);
+        this.handleInput(this.inputBox.value);
+        this.inputBox.value = ""; 
       }
     });
 }
@@ -52,28 +53,30 @@ class MainScene extends Phaser.Scene {
         console.log("No word entered");
         return;
     }
-
+ 
     // Check if the typed word matches any of the available words
     if (this.leftWord.checkMatch(typedWord)) {
         console.log("left true");
+        // replace it with a new word
+        this.leftWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
 
         // Lets attempt to update the players location and find if it moved
-        result = this.player.update(time, delta, "left");
+        this.player.update(time, delta, "left");
     } else if (this.middleWord.checkMatch(typedWord)) {
         console.log("middle true");
 
+        this.middleWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+
         // Lets attempt to update the players location and find if it moved
-        result = this.player.update(time, delta, "middle");
+        this.player.update(time, delta, "middle");
     } else if (this.rightWord.checkMatch(typedWord)) {
         console.log("right true");
 
-        // Lets attempt to update the players location and find if it moved
-        result = this.player.update(time, delta, "right");
-    }
+        this.rightWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
 
-    // ! Do a check on result to see if we moved and then call update on word guessed
-    // ! define some sort mechanision to find a new word 
-    
+        // Lets attempt to update the players location and find if it moved
+        this.player.update(time, delta, "right");
+    }
   }
 
   // For game cycle
@@ -101,3 +104,5 @@ const config = {
 
 // Initialize the Phaser game
 const game = new Phaser.Game(config);
+
+let wordBank = []; // global

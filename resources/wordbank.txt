@@ -1,12 +1,12 @@
-apple, banana, orange, grape, cherry, lemon, lime, mango, peach, pear, berry, melon, plum, kiwi, raisin, fig, papaya, avocado, pineapple, carrot, lettuce, spinach, broccoli, cabbage, 
-tomato, potato, onion, garlic, pepper, celery, cucumber, radish, mushroom, squash, pumpkin, winter, summer, spring, autumn, season, month, year, week, day, hour, minute, second, moment, 
-morning, evening, twilight, midnight, dawn, happy, joyful, cheerful, excited, grateful, thankful, proud, content, calm, serene, relaxed, peaceful, tired, energetic, restless, bored, house,
-home, apartment, mansion, castle, cabin, shack, cottage, villa, dorm, loft, duplex, bungalow, hut, shelter, building, tower, tent, dog, cat, bird, fish, rabbit, hamster, turtle, snake, 
-horse, pig, cow, goat, sheep, llama, duck, chicken, rooster, mouse, rat, squirrel, red, blue, green, yellow, orange, purple, pink, black, white, gray, brown, gold, silver, beige, maroon, 
-eal, lavender, coral, cyan, navy, water, fire, earth, air, metal, wood, stone, clay, glass, sand, rock, ice, steam, wind, rain, storm, cloud, snow, hail, thunder, lightning, smile, laugh, 
-cry, frown, shout, whisper, yell, talk, listen, hear, sing, hum, clap, snap, stomp, jump, run, walk, sit, stand, lie, rest, read, chair, table, couch, bed, shelf, drawer, closet, desk, lamp, 
-mirror, rug, curtain, fan, vase, clock, frame, pillow, blanket, towel, basket, car, bike, truck, train, bus, plane, boat, ship, canoe, kayak, raft, scooter, subway, ferry, tram, cart, skate, 
-board, wagon, sled, glider, love, hate, hope, fear, trust, doubt, envy, pride, guilt, shame, honor, courage, faith, greed, wrath, peace, joy, sorrow, regret, desire, bread, cheese, milk, 
-butter, egg, meat, chicken, beef, pork, fish, shrimp, rice, pasta, flour, sugar, salt, pepper, spice, honey, oil, cream, book, paper, pen, pencil, eraser, ruler, stapler, scissors, tape, 
-glue, folder, notebook, binder, marker, crayon, chalk, brush, paint, canvas, shirt, pants, shoes, socks, hat, scarf, gloves, jacket, coat, sweater, dress, skirt, belt, tie, shorts, jeans, 
-uniform, sandals, boots, heels,
+apple, banana, orange, grape, cherry, lemon, lime, mango, peach, pear, berry, melon, plum, kiwi, raisin, fig, papaya, avocado, pineapple, carrot, lettuce, spinach, broccoli, cabbage
+tomato, potato, onion, garlic, pepper, celery, cucumber, radish, mushroom, squash, pumpkin, winter, summer, spring, autumn, season, month, year, week, day, hour, minute, second, moment
+morning, evening, twilight, midnight, dawn, happy, joyful, cheerful, excited, grateful, thankful, proud, content, calm, serene, relaxed, peaceful, tired, energetic, restless, bored, house
+home, apartment, mansion, castle, cabin, shack, cottage, villa, dorm, loft, duplex, bungalow, hut, shelter, building, tower, tent, dog, cat, bird, fish, rabbit, hamster, turtle, snake
+horse, pig, cow, goat, sheep, llama, duck, chicken, rooster, mouse, rat, squirrel, red, blue, green, yellow, orange, purple, pink, black, white, gray, brown, gold, silver, beige, maroon
+eal, lavender, coral, cyan, navy, water, fire, earth, air, metal, wood, stone, clay, glass, sand, rock, ice, steam, wind, rain, storm, cloud, snow, hail, thunder, lightning, smile, laugh
+cry, frown, shout, whisper, yell, talk, listen, hear, sing, hum, clap, snap, stomp, jump, run, walk, sit, stand, lie, rest, read, chair, table, couch, bed, shelf, drawer, closet, desk, lamp
+mirror, rug, curtain, fan, vase, clock, frame, pillow, blanket, towel, basket, car, bike, truck, train, bus, plane, boat, ship, canoe, kayak, raft, scooter, subway, ferry, tram, cart, skate
+board, wagon, sled, glider, love, hate, hope, fear, trust, doubt, envy, pride, guilt, shame, honor, courage, faith, greed, wrath, peace, joy, sorrow, regret, desire, bread, cheese, milk
+butter, egg, meat, chicken, beef, pork, fish, shrimp, rice, pasta, flour, sugar, salt, pepper, spice, honey, oil, cream, book, paper, pen, pencil, eraser, ruler, stapler, scissors, tape
+glue, folder, notebook, binder, marker, crayon, chalk, brush, paint, canvas, shirt, pants, shoes, socks, hat, scarf, gloves, jacket, coat, sweater, dress, skirt, belt, tie, shorts, jeans
+uniform, sandals, boots, heels
