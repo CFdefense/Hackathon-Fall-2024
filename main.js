@@ -10,7 +10,8 @@ class MainScene extends Phaser.Scene {
     // Preload assets if needed
     this.load.text('wordBankFile', 'resources/wordbank.txt');
     this.load.audio("background", ["resources/jazz-beat.mp3"]); 
-    this.load.audio("ding", ["resources/ding.mp3"])
+    this.load.audio("ding", ["resources/ding.mp3"]);
+    this.load.audio("wrong", ["resources/wrong.mp3"]);
   }
 
   // Creating our Initial Display
@@ -19,8 +20,11 @@ class MainScene extends Phaser.Scene {
     new gameWindow(this, window.innerWidth / 3.3, 75);
 
     // Music
-    let backgroundMusic = this.sound.add("background", { loop: true });
-    // backgroundMusic.play();
+    let backgroundMusic = this.sound.add("background", { volume: 0.04 }, { loop: false });
+    backgroundMusic.play();
+
+    this.correctNoise = this.sound.add("ding", { loop: false });
+    this.wrongNoise = this.sound.add("wrong", { loop: false });
 
     // Create an instance of the RedSquare class
     this.player = new Player(this, 365, 400);
@@ -57,6 +61,7 @@ class MainScene extends Phaser.Scene {
     let correct = this.sound.add("ding", { loop: false });
     const typedWord = text.trim();
     if (!typedWord) {
+      this.wrongNoise.play();
         console.log("No word entered");
         return;
     }
@@ -68,12 +73,13 @@ class MainScene extends Phaser.Scene {
 
         if (result === true) {
           console.log("left true");
-          correct.play();
+          this.correctNoise.play();
 
           // replace it with a new word
           this.leftWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
         } else {
-          console.log("Wrong")
+          this.wrongNoise.play();
+        console.log("Wrong")
         }
     } else if (this.middleWord.checkMatch(typedWord)) {
       // Lets attempt to update the players location and find if it moved
@@ -81,11 +87,11 @@ class MainScene extends Phaser.Scene {
       
       if (result === true) {
         console.log("middle true");
-        correct.play();
-        
-        // replace it with a new word
+        this.correctNoise.play();
+
         this.middleWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
       } else {
+        this.wrongNoise.play();
         console.log("Wrong")
       }
     } else if (this.rightWord.checkMatch(typedWord)) {
@@ -94,15 +100,18 @@ class MainScene extends Phaser.Scene {
 
       if (result === true) {
         console.log("right true");
-        correct.play();
+        this.correctNoise.play();
 
         // replace it with a new word
         this.rightWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+
       } else {
+        this.wrongNoise.play();
         console.log("Wrong")
       }
     } else {
-      console.log("Wrong")
+      this.wrongNoise.play();
+        console.log("Wrong")
     }
   }
 
