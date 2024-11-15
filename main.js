@@ -1,14 +1,30 @@
-import { Application } from 'pixi.js';
+import Phaser from 'phaser';
+import { RedSquare } from './src/phaser/sprites';
 
-// Asynchronous IIFE
-(async () =>
-{
-    // Create a PixiJS application.
-    const app = new Application();
+class MainScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'MainScene' });
+  }
 
-    // Intialize the application.
-    await app.init({ background: '#1099bb', resizeTo: window });
+  preload() {
+    // Preload assets if needed
+  }
 
-    // Then adding the application's canvas to the DOM body.
-    document.body.appendChild(app.canvas);
-})();
+  create() {
+    // Create an instance of the RedSquare class
+    new RedSquare(this, 50, 50, 200, 100); // x, y, width, height
+  }
+}
+
+// Configuration for the Phaser game
+const config = {
+  type: Phaser.AUTO, // Automatically choose WebGL or Canvas
+  width: 800,
+  height: 600,
+  backgroundColor: 0x1099bb,
+  scene: MainScene, // Set the main scene
+  parent: 'game-container', // Optionally set a DOM element to attach the canvas
+};
+
+// Initialize the Phaser game
+const game = new Phaser.Game(config);

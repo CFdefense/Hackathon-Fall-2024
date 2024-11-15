@@ -12,6 +12,6 @@
     "vite": "^5.4.10"
   },
   "dependencies": {
-    "pixi.js": "^8.5.2"
+    "phaser": "^3.87.0"
   }
 }
