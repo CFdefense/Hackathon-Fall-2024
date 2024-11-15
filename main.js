@@ -1,6 +1,32 @@
 import Phaser from 'phaser';
 import { gameWindow, Player, Word, Obstacle} from './src/phaser/sprites';
 
+class MenuScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'MenuScene' }); // Key to identify the scene
+  }
+
+  preload() {
+    // Preload assets for the menu (e.g., background, buttons)
+    this.load.image('menuBackground', 'resources/menu-background.png');
+    this.load.image('startButton', 'resources/start-button.png');
+  }
+
+  create() {
+    // Add a background image
+    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'menuBackground')
+      .setOrigin(0.5);
+
+    // Add a "Start Game" button
+    const startButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'startButton')
+      .setInteractive() // Make the button interactive
+      .setScale(.5)
+      .on('pointerdown', () => {
+        this.scene.start('MainScene'); // Switch to the main game scene
+      });
+  }
+}
+
 class MainScene extends Phaser.Scene {
   constructor() {
     super({ key: 'MainScene' });
@@ -158,8 +184,6 @@ class MainScene extends Phaser.Scene {
     */
     this.obstacle = new Obstacle(this, "Left")
   }
-
-
 }
 
 // Configuration for the Phaser game
@@ -168,7 +192,7 @@ const config = {
   width: window.innerWidth / 1.2, // Full-screen width
   height: window.innerHeight + 30, // Full-screen height
   backgroundColor: 0x1099bb,
-  scene: MainScene, // Set the main scene
+  scene: [MenuScene, MainScene], // Start with MenuScene
   parent: 'app', // Optionally set a DOM element to attach the canvas
 };
 
