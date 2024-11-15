@@ -10,12 +10,21 @@ class MainScene extends Phaser.Scene {
     // Preload assets if needed
   }
 
+  // Creating our Initial Display
   create() {
     // Create main game display
-    new gameWindow(this, window.innerWidth / 3.3, 50);
+    new gameWindow(this, window.innerWidth / 3.3, 0);
 
     // Create an instance of the RedSquare class
-    new Player(this, 75, 75, 75, 75);
+    new Player(this, 365, 325, 75, 75);
+  }
+
+  // For game cycle
+  update(time, delta) {
+    // Implement logic in here for game functionality
+
+
+
   }
 }
 

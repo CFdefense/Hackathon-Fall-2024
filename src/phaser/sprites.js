@@ -15,7 +15,7 @@ export class gameWindow {
     this.graphics = scene.add.graphics(); // Create a graphics object\
 
     const width = 225; // Fixed width
-    const height = 350; // Fixed height
+    const height = 400; // Fixed height
     
     // Draw the black outline
     this.graphics.lineStyle(2, 0x000000, 1); // Line width and color
