@@ -123,8 +123,9 @@ class MainScene extends Phaser.Scene {
         console.log("Collision detected with obstacle:", currObstacle);
         
         // Handle Collision Here
-        this.scene.start('MainScene'); // go to mainmenu
-
+        alert("GAME OVER");
+        this.scene.start('MenuScene'); // go to mainmenu
+        
         return true;
       }
     }
@@ -214,6 +215,9 @@ class MainScene extends Phaser.Scene {
         obs.graphics.clear();
       }
     });
+
+    // detect collision
+    this.checkForCollision();
   }
 }
 

@@ -1,6 +1,7 @@
-1. Updating words -> use word bank
-2. Obstacle rendering and collision detection
-3. Make it look pretty
+1. Make it look pretty
+2. Obstacle spawning improvement
+3. Obstacle speed/spawnrate adjustment
+4. Leaderboard
 
 extra
 
