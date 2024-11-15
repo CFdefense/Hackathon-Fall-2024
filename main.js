@@ -58,7 +58,6 @@ class MainScene extends Phaser.Scene {
 
   // This will check the typed word and move the player if there's a match
   handleInput(text, time, delta) {
-    let correct = this.sound.add("ding", { loop: false });
     const typedWord = text.trim();
     if (!typedWord) {
       this.wrongNoise.play();
@@ -69,9 +68,9 @@ class MainScene extends Phaser.Scene {
     // Check if the typed word matches any of the available words
     if (this.leftWord.checkMatch(typedWord)) {
         // Lets attempt to update the players location and find if it moved
-        result = this.player.update(time, delta, "left");
+        let result = this.player.update(time, delta, "left");
 
-        if (result === true) {
+        if (result == true) {
           console.log("left true");
           this.correctNoise.play();
 
@@ -83,9 +82,9 @@ class MainScene extends Phaser.Scene {
         }
     } else if (this.middleWord.checkMatch(typedWord)) {
       // Lets attempt to update the players location and find if it moved
-      result = this.player.update(time, delta, "middle");
+      let result = this.player.update(time, delta, "middle");
       
-      if (result === true) {
+      if (result == true) {
         console.log("middle true");
         this.correctNoise.play();
 
@@ -96,9 +95,9 @@ class MainScene extends Phaser.Scene {
       }
     } else if (this.rightWord.checkMatch(typedWord)) {
       // Lets attempt to update the players location and find if it moved
-      result = this.player.update(time, delta, "right");
+      let result = this.player.update(time, delta, "right");
 
-      if (result === true) {
+      if (result == true) {
         console.log("right true");
         this.correctNoise.play();
 
