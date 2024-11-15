@@ -196,7 +196,7 @@ class MainScene extends Phaser.Scene {
       maybe decrease timer as game goes on
       game must always be possible to survive
     */
-
+    // make obstacles
     let currentTime = Date.now();
     if (currentTime - this.lastObsTime >= this.obstacleInterval) {
       let newPos = this.obstaclePos[Math.floor(Math.random() * this.obstaclePos.length)];
@@ -204,6 +204,16 @@ class MainScene extends Phaser.Scene {
       this.lastObsTime = currentTime;
       this.obstacles.push(new Obstacle(this, newPos));
     }
+
+    // move them down
+    this.obstacles.forEach((obs) => {
+      obs.update();
+      // remove obstacle if off screen
+      if(obs.y >= 326) {
+        this.obstacles.splice(this.obstacles.indexOf(obs), 1);
+        obs.graphics.clear();
+      }
+    });
   }
 }
 

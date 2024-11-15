@@ -92,23 +92,23 @@ export class Obstacle {
     // Obstacle Design
     this.scene = scene;
     this.graphics = scene.add.graphics(); 
-    this.graphics.fillStyle(0x0000, 1); 
+    this.graphics.fillStyle(0x000000, 1); 
     this.graphics.fillRect(this.x, this.y, this.width, this.height);
     this.scene.add.existing(this.graphics);
   }
 
   update(time, delta) {
     // Move down some value towards player
-    const newYPos = this.y - 1;
+    this.y += .05;
 
     // Clear the previous graphics before redrawing
     this.graphics.clear();
 
     // Set the fill color again (important after clear)
-    this.graphics.fillStyle(0xff0000, 1); // Red color
+    this.graphics.fillStyle(0x000000, 1); // Red color
 
     // Redraw the Obstacle at the new position
-    this.graphics.fillRect(this.x, newYPos, this.width, this.height);
+    this.graphics.fillRect(this.x, this.y, this.width, this.height);
   }
 }
 
