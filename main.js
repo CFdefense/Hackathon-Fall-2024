@@ -20,11 +20,11 @@ class MainScene extends Phaser.Scene {
     new gameWindow(this, window.innerWidth / 3.3, 75);
 
     // Music
-    let backgroundMusic = this.sound.add("background", { volume: 0.04 }, { loop: false });
-    backgroundMusic.play();
-
+    let backgroundMusic = this.sound.add("background", { volume: 0.04 }, { loop: true });
+    backgroundMusic.play()
     this.correctNoise = this.sound.add("ding", { loop: false });
     this.wrongNoise = this.sound.add("wrong", { loop: false });
+    // backgroundMusic.play();
 
     // Create an instance of the RedSquare class
     this.player = new Player(this, 365, 400);
@@ -60,7 +60,6 @@ class MainScene extends Phaser.Scene {
   handleInput(text, time, delta) {
     const typedWord = text.trim();
     if (!typedWord) {
-      this.wrongNoise.play();
         console.log("No word entered");
         return;
     }
@@ -70,7 +69,7 @@ class MainScene extends Phaser.Scene {
         // Lets attempt to update the players location and find if it moved
         let result = this.player.update(time, delta, "left");
 
-        if (result == true) {
+        if (result === true) {
           console.log("left true");
           this.correctNoise.play();
 
@@ -84,10 +83,11 @@ class MainScene extends Phaser.Scene {
       // Lets attempt to update the players location and find if it moved
       let result = this.player.update(time, delta, "middle");
       
-      if (result == true) {
+      if (result === true) {
         console.log("middle true");
         this.correctNoise.play();
-
+        
+        // replace it with a new word
         this.middleWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
       } else {
         this.wrongNoise.play();
@@ -97,19 +97,17 @@ class MainScene extends Phaser.Scene {
       // Lets attempt to update the players location and find if it moved
       let result = this.player.update(time, delta, "right");
 
-      if (result == true) {
+      if (result === true) {}
         console.log("right true");
         this.correctNoise.play();
 
-        // replace it with a new word
         this.rightWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
-      } else {
-        this.wrongNoise.play();
-        console.log("Wrong")
-      }
+
+        // Lets attempt to update the players location and find if it moved
+        this.player.update(time, delta, "right");
     } else {
       this.wrongNoise.play();
-        console.log("Wrong")
+      console.log("Wrong")
     }
   }
 
