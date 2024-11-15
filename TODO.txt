@@ -1,0 +1,13 @@
+Implement Home screen w scoreboard and start game options
+
+Implement typing logic
+
+Implement rendering logic of enemies
+
+Implement collision logic
+
+Implement Score keeping logic
+
+Implement displaying of words to type logic
+
+Implement moving based off of typed words logic
