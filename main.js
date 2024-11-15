@@ -8,13 +8,18 @@ class MainScene extends Phaser.Scene {
 
   preload() {
     // Preload assets if needed
-    this.load.text('wordBankFile', 'resources/wordbank.txt'); 
+    this.load.text('wordBankFile', 'resources/wordbank.txt');
+    this.load.audio("background", ["resources/jazz-beat.mp3"]); 
   }
 
   // Creating our Initial Display
   create() {
     // Create main game display
     new gameWindow(this, window.innerWidth / 3.3, 75);
+
+    // Music
+    let backgroundMusic = this.sound.add("background", { loop: true });
+    backgroundMusic.play();
 
     // Create an instance of the RedSquare class
     this.player = new Player(this, 365, 400);
