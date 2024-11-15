@@ -8,6 +8,7 @@ class MainScene extends Phaser.Scene {
 
   preload() {
     // Preload assets if needed
+    this.load.text('wordBankFile', 'resources/wordbank.txt'); 
   }
 
   // Creating our Initial Display
@@ -18,11 +19,20 @@ class MainScene extends Phaser.Scene {
     // Create an instance of the RedSquare class
     this.player = new Player(this, 365, 400);
 
+    // load the wordbank
+    let wordBank = []
+    const fileContent = this.cache.text.get('wordBankFile');
+    const lines = fileContent.split('\n').map(line => line.trim());
+    lines.forEach(line => {
+      const newWords = line.split(',');
+      wordBank = wordBank.concat(newWords);
+    });
+
     // Create instances of words
     this.leftWord = new Word(this, 75, 0, 100, 40, "leftWord");
     this.middleWord = new Word(this, 355, 0, 100, 40, "middleWord");
     this.rightWord = new Word(this, 600, 0, 100, 40, "rightWord");
-
+    
     // Capture the input from the text box
     this.inputBox = document.querySelector('.text-box');
     
