@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { RedSquare } from './src/phaser/sprites';
+import { gameWindow, Player } from './src/phaser/sprites';
 
 class MainScene extends Phaser.Scene {
   constructor() {
@@ -11,19 +11,22 @@ class MainScene extends Phaser.Scene {
   }
 
   create() {
+    // Create main game display
+    new gameWindow(this, window.innerWidth / 3.3, 50);
+
     // Create an instance of the RedSquare class
-    new RedSquare(this, 50, 50, 200, 100); // x, y, width, height
+    new Player(this, 75, 75, 75, 75);
   }
 }
 
 // Configuration for the Phaser game
 const config = {
   type: Phaser.AUTO, // Automatically choose WebGL or Canvas
-  width: 800,
-  height: 600,
+  width: window.innerWidth / 1.2, // Full-screen width
+  height: window.innerHeight, // Full-screen height
   backgroundColor: 0x1099bb,
   scene: MainScene, // Set the main scene
-  parent: 'game-container', // Optionally set a DOM element to attach the canvas
+  parent: 'app', // Optionally set a DOM element to attach the canvas
 };
 
 // Initialize the Phaser game
