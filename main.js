@@ -22,13 +22,34 @@ class MenuScene extends Phaser.Scene {
     video.setScale(2); // Optional: Scale the video
     video.play(true); // Play the video and loop it
 
+    // Display the high score in the top right corner
+    this.highScoreText = this.add.text(
+      this.cameras.main.width - 10, // Position it at the right edge of the screen
+      10, // Position it near the top
+      `High Score: ${globalHighScore}`, // Display the high score
+      {
+        font: '24px Arial',
+        fill: '#ffffff',
+        align: 'right'
+      }
+    );
+    this.highScoreText.setOrigin(1, 0); // Align to the top-right corner
+
     // Add a "Start Game" button
     const startButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 100, 'startButton')
       .setInteractive() // Make the button interactive
       .setScale(.5)
       .on('pointerdown', () => {
         this.scene.start('MainScene'); // Switch to the main game scene
-      });
+      }); 
+  }
+
+  // Method to update the high score text dynamically
+  updateHighScore(newScore) {
+    if (newScore > globalHighScore) {
+      globalHighScore = newScore;
+      this.highScoreText.setText(`High Score: ${globalHighScore}`);
+    }
   }
 }
 
@@ -69,6 +90,9 @@ class MainScene extends Phaser.Scene {
     this.obstaclePos = ["Left", "Middle", "Right"];
     this.obstacleInterval = 10000;
     this.lastObsTime = 0;
+
+    // Highscore variable
+    this.score = 0;
 
     // load the wordbank
     const fileContent = this.cache.text.get('wordBankFile');
@@ -127,6 +151,10 @@ class MainScene extends Phaser.Scene {
         // Handle Collision Here
         this.gameOverSound.play();
         alert("GAME OVER");
+
+        // Check local highScore VS global
+        this.scene.get('MenuScene').updateHighScore(this.score);
+
         this.scene.start('MenuScene'); // go to mainmenu
         
         return true;
@@ -154,6 +182,9 @@ class MainScene extends Phaser.Scene {
 
           // replace it with a new word
           this.leftWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+
+          // Increment Score
+          this.score += 1;
         } else {
           this.wrongNoise.play();
           console.log("Wrong")
@@ -168,6 +199,9 @@ class MainScene extends Phaser.Scene {
         
         // replace it with a new word
         this.middleWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+
+        // Increment Score
+        this.score += 1;
       } else {
         this.wrongNoise.play();
         console.log("Wrong")
@@ -184,6 +218,9 @@ class MainScene extends Phaser.Scene {
 
         // Lets attempt to update the players location and find if it moved
         this.player.update(time, delta, "right");
+
+        // Increment Score
+        this.score += 1;
     } else {
       this.wrongNoise.play();
       console.log("Wrong")
@@ -193,13 +230,6 @@ class MainScene extends Phaser.Scene {
   // For game cycle
   update(time, delta) {
     // Implement logic in here for game functionality
-
-    /* 
-      Obstacle Logic Goes Here
-      need to have some set timer before an obstacle will spawn again
-      maybe decrease timer as game goes on
-      game must always be possible to survive
-    */
     // make obstacles
     let currentTime = Date.now();
     if (currentTime - this.lastObsTime >= this.obstacleInterval) {
@@ -237,4 +267,6 @@ const config = {
 // Initialize the Phaser game
 const game = new Phaser.Game(config);
 
-let wordBank = []; // global
+// globals
+let wordBank = [];
+let globalHighScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore')) : 0;
