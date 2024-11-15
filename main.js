@@ -79,7 +79,7 @@ class MainScene extends Phaser.Scene {
           this.leftWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
         } else {
           this.wrongNoise.play();
-        console.log("Wrong")
+          console.log("Wrong")
         }
     } else if (this.middleWord.checkMatch(typedWord)) {
       // Lets attempt to update the players location and find if it moved
@@ -104,7 +104,6 @@ class MainScene extends Phaser.Scene {
 
         // replace it with a new word
         this.rightWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
-
       } else {
         this.wrongNoise.play();
         console.log("Wrong")
