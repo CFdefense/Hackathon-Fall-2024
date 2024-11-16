@@ -1,6 +1,0 @@
-1. Make it look pretty
-
-extra
-
-Main menu
-    Add words
