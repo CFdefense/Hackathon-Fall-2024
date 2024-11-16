@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { gameWindow, Player, Word, Obstacle} from './src/phaser/sprites';
+import { gameWindow, Player, Word, Obstacle, increaseSpeed} from './src/phaser/sprites';
 
 class MenuScene extends Phaser.Scene {
   constructor() {
@@ -88,8 +88,11 @@ class MainScene extends Phaser.Scene {
 
     this.obstacles = [];
     this.obstaclePos = ["Left", "Middle", "Right"];
-    this.obstacleInterval = 10000;
+    this.obstacleInterval = 1000;
     this.lastObsTime = 0;
+
+    this.speedIncInterval = 1000;
+    this.lastSpeedInc = 0;
 
     // Highscore variable
     this.score = 0;
@@ -232,7 +235,13 @@ class MainScene extends Phaser.Scene {
     // Implement logic in here for game functionality
     // make obstacles
     let currentTime = Date.now();
-    if (currentTime - this.lastObsTime >= this.obstacleInterval) {
+    // make obstacles move faster
+    if (currentTime - this.lastSpeedInc >= this.speedIncInterval) {
+      increaseSpeed();
+      this.lastSpeedInc = currentTime;
+    }
+
+    if ((this.obstacles.length < 2) && (currentTime - this.lastObsTime >= this.obstacleInterval)) {
       let newPos = this.obstaclePos[Math.floor(Math.random() * this.obstaclePos.length)];
       console.log("New Obstacle in Pos: " + newPos)
       this.lastObsTime = currentTime;

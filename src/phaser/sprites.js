@@ -59,6 +59,12 @@ export class Player {
   }
 }
 
+let obstacleSpeed = 0.05;
+
+export function increaseSpeed() {
+  obstacleSpeed += 0.01;
+}
+
 // Obstacle Sprite
 export class Obstacle {
   constructor(scene, newPosition) {
@@ -93,7 +99,7 @@ export class Obstacle {
 
   update(time, delta) {
     // Move down some value towards player
-    this.y += .05;
+    this.y += obstacleSpeed;
 
     // Clear the previous graphics before redrawing
     this.graphics.clear();
