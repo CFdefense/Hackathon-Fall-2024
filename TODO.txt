@@ -1,11 +1,6 @@
 1. Make it look pretty
-2. Obstacle spawning improvement
-3. Obstacle speed/spawnrate adjustment
-4. Leaderboard
 
 extra
 
 Main menu
-    Play
     Add words
-    Leaderboard
