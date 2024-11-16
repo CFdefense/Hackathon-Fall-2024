@@ -9,4 +9,4 @@ mirror, rug, curtain, fan, vase, clock, frame, pillow, blanket, towel, basket, c
 board, wagon, sled, glider, love, hate, hope, fear, trust, doubt, envy, pride, guilt, shame, honor, courage, faith, greed, wrath, peace, joy, sorrow, regret, desire, bread, cheese, milk
 butter, egg, meat, chicken, beef, pork, fish, shrimp, rice, pasta, flour, sugar, salt, pepper, spice, honey, oil, cream, book, paper, pen, pencil, eraser, ruler, stapler, scissors, tape
 glue, folder, notebook, binder, marker, crayon, chalk, brush, paint, canvas, shirt, pants, shoes, socks, hat, scarf, gloves, jacket, coat, sweater, dress, skirt, belt, tie, shorts, jeans
-uniform, sandals, boots, heels, PatrickTyler, Peter John Arvanitis
+uniform, sandals, boots, heels, PatrickTyler, Peter John Arvanitis, tuah

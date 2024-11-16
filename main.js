@@ -111,6 +111,32 @@ class MainScene extends Phaser.Scene {
 
   // Creating our Initial Display
   create() {
+    this.highScoreText = this.add.text(
+      10, // Position it near the left edge
+      this.cameras.main.height - 65, // Adjusted to make it a little higher from the bottom
+      `High Score: ${globalHighScore}`, // Display the high score
+      {
+        font: '24px Arial',
+        fill: '#ffffff',
+        align: 'left'
+      }
+    );
+    // Align to the bottom-left corner (origin at top-left of the text)
+    this.highScoreText.setOrigin(0, 1);
+
+    this.scoreText = this.add.text(
+      10, // Position it near the left edge
+      this.cameras.main.height - 40, // Adjusted to make it a little higher from the bottom
+      `Current Score: ${this.score}`, // Display the high score
+      {
+        font: '24px Arial',
+        fill: '#ffffff',
+        align: 'left'
+      }
+    );
+    // Align to the bottom-left corner (origin at top-left of the text)
+    this.scoreText.setOrigin(0, 1);
+
     // Show the input element when entering the main game
     const typingElement = document.querySelector('.typing-element');
     typingElement.classList.remove('hidden');
@@ -336,6 +362,21 @@ class MainScene extends Phaser.Scene {
 
     // detect collision
     this.checkForCollision();
+
+    // update score
+    this.scoreText.destroy();
+    this.scoreText = this.add.text(
+      10, // Position it near the left edge
+      this.cameras.main.height - 40, // Adjusted to make it a little higher from the bottom
+      `Current Score: ${this.score}`, // Display the high score
+      {
+        font: '24px Arial',
+        fill: '#ffffff',
+        align: 'left'
+      }
+    );
+    // Align to the bottom-left corner (origin at top-left of the text)
+    this.scoreText.setOrigin(0, 1);
   }
 }
 
