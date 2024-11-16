@@ -134,7 +134,7 @@ export class gameWindow {
     this.graphics.strokeRect(x, y, width, height);
 
     // Fill the rectangle with white
-    this.graphics.fillStyle(0xffffff, 1);
+    this.graphics.fillStyle(0xDCDCDC, 1);
     this.graphics.fillRect(x, y, width, height);
   }
 }
@@ -154,7 +154,7 @@ export class Word {
 
     // Create a graphics object for the rectangle
     this.graphics = scene.add.graphics();
-    this.graphics.fillStyle(0x00ff00, 1); // Set rectangle color (green)
+    this.graphics.fillStyle(0x2ecc71, 1); // Set rectangle color (green)
     this.graphics.fillRect(this.x, this.y, this.width, this.height);
 
     // Create text inside the rectangle with increased resolution (adjust the 'resolution' parameter)

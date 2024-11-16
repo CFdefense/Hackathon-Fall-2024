@@ -175,9 +175,9 @@ class MainScene extends Phaser.Scene {
     console.log("Word Bank: " + wordBank);
 
     // Create instances of words
-    this.leftWord = new Word(this, 75, 0, 100, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
-    this.middleWord = new Word(this, 355, 0, 100, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
-    this.rightWord = new Word(this, 600, 0, 100, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
+    this.leftWord = new Word(this, 55, 0, 125, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
+    this.middleWord = new Word(this, 340, 0, 125, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
+    this.rightWord = new Word(this, 580, 0, 125, 40, wordBank[Math.floor(Math.random() * wordBank.length)]);
     
     // Capture the input from the text box
     this.inputBox = document.querySelector('.text-box');
@@ -385,7 +385,7 @@ const config = {
   type: Phaser.AUTO, // Automatically choose WebGL or Canvas
   width: window.innerWidth / 1.2, // Full-screen width
   height: window.innerHeight + 30, // Full-screen height
-  backgroundColor: 0x1099bb,
+  backgroundColor: 0x34495e,
   scene: [MenuScene, MainScene, LeaderboardScene], // Start with MenuScene
   parent: 'app', // Optionally set a DOM element to attach the canvas
 };
