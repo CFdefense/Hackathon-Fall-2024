@@ -10,6 +10,7 @@ class MenuScene extends Phaser.Scene {
     // Preload assets for the menu (e.g., background, buttons)
     this.load.video('menuBackgroundVideo', 'resources/background-video.mp4', 'loadeddata', false, true);
     this.load.image('startButton', 'resources/start-button.png');
+    this.load.image('leaderboardButton', 'resources/leaderboard.png');
   }
 
   create() {
@@ -42,6 +43,16 @@ class MenuScene extends Phaser.Scene {
       .on('pointerdown', () => {
         this.scene.start('MainScene'); // Switch to the main game scene
       }); 
+
+
+    // Add the "Leaderboard" button at the top-left corner
+    const leaderboardButton = this.add.image(10, 10, 'leaderboardButton')
+    .setInteractive()
+    .setScale(0.1)
+    .setOrigin(0, 0) // Align to the top-left corner
+    .on('pointerdown', () => {
+      this.scene.start('LeaderboardScene'); // Replace 'LeaderboardScene' with the actual scene name for your leaderboard
+    });
   }
 
   // Method to update the high score text dynamically
@@ -52,6 +63,37 @@ class MenuScene extends Phaser.Scene {
     }
   }
 }
+
+class LeaderboardScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'LeaderboardScene' });
+  }
+
+  preload() {
+    // Preload assets if needed
+  }
+
+  create() {
+    // Load leaderboard data from local storage
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+
+    // Display the leaderboard title
+    this.add.text(100, 100, 'Leaderboard', { font: '32px Arial', fill: '#ffffff' });
+
+    // Display top 5 players
+    leaderboard.slice(0, 5).forEach((entry, index) => {
+      this.add.text(100, 150 + index * 40, `${entry.name}: ${entry.score}`, { font: '24px Arial', fill: '#ffffff' });
+    });
+
+    // Add a back button
+    const backButton = this.add.text(100, 200 + leaderboard.length * 40, 'Back', { font: '24px Arial', fill: '#ff0000' })
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.scene.start('MenuScene'); // Go back to the MenuScene
+      });
+  }
+}
+
 
 class MainScene extends Phaser.Scene {
   constructor() {
@@ -150,17 +192,13 @@ class MainScene extends Phaser.Scene {
         this.gameOverSound.play();
         alert("GAME OVER");
 
-        // Check local highScore VS global
-        if(this.score > globalHighScore) {
+        // At game over, call handleGameOver
+        if (this.score > globalHighScore) {
           globalHighScore = this.score;
-          // Update the high score in local storage
-          localStorage.setItem('highScore', globalHighScore);
+          this.scene.get('MenuScene').updateHighScore(globalHighScore);
         }
-        // Call the updateHighScore method to update the text
-        this.scene.get('MenuScene').updateHighScore(globalHighScore);
-        resetSpeed();
-        this.scene.start('MenuScene'); // go to mainmenu
-        
+        this.handleGameOver(); // Prompt for name and save score
+
         return true;
       }
     }
@@ -232,6 +270,37 @@ class MainScene extends Phaser.Scene {
     }
   }
 
+  // Method to handle the end of the game
+  handleGameOver() {
+    // Prompt for player name
+    const playerName = prompt("Enter your name:");
+
+    // If player provided a name, save it with their score
+    if (playerName) {
+      const playerData = {
+        name: playerName,
+        score: this.score
+      };
+
+      // Save to local storage (for simplicity, using local storage here)
+      let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+      leaderboard.push(playerData);
+      leaderboard.sort((a, b) => b.score - a.score);  // Sort leaderboard by score (descending)
+
+      // Save back to local storage
+      localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    }
+
+    // Update global high score if needed
+    if (this.score > globalHighScore) {
+      globalHighScore = this.score;
+      localStorage.setItem('highScore', globalHighScore);
+    }
+
+    // Go to the menu scene
+    this.scene.start('MenuScene');
+  }
+
   // For game cycle
   update(time, delta) {
     // Implement logic in here for game functionality
@@ -271,7 +340,7 @@ const config = {
   width: window.innerWidth / 1.2, // Full-screen width
   height: window.innerHeight + 30, // Full-screen height
   backgroundColor: 0x1099bb,
-  scene: [MenuScene, MainScene], // Start with MenuScene
+  scene: [MenuScene, MainScene, LeaderboardScene], // Start with MenuScene
   parent: 'app', // Optionally set a DOM element to attach the canvas
 };
 
