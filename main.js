@@ -88,7 +88,7 @@ class MainScene extends Phaser.Scene {
 
     this.obstacles = [];
     this.obstaclePos = ["Left", "Middle", "Right"];
-    this.obstacleInterval = 1000;
+    this.obstacleInterval = 3000;
     this.lastObsTime = 0;
 
     this.speedIncInterval = 1000;
@@ -175,6 +175,11 @@ class MainScene extends Phaser.Scene {
         return;
     }
     
+    let newWord = this.leftWord.initialText;
+    // make sure word isnt already there
+    while(newWord == this.leftWord.initialText | newWord == this.middleWord.initialText | newWord == this.rightWord.initialText) {
+        newWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+    }
     // Check if the typed word matches any of the available words
     if (this.leftWord.checkMatch(typedWord)) {
         // Lets attempt to update the players location and find if it moved
@@ -185,7 +190,7 @@ class MainScene extends Phaser.Scene {
           this.correctNoise.play();
 
           // replace it with a new word
-          this.leftWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+          this.leftWord.update(newWord);
 
           // Increment Score
           this.score += 1;
@@ -202,7 +207,7 @@ class MainScene extends Phaser.Scene {
         this.correctNoise.play();
         
         // replace it with a new word
-        this.middleWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+        this.middleWord.update(newWord);
 
         // Increment Score
         this.score += 1;
@@ -218,7 +223,7 @@ class MainScene extends Phaser.Scene {
         console.log("right true");
         this.correctNoise.play();
 
-        this.rightWord.update(wordBank[Math.floor(Math.random() * wordBank.length)]);
+        this.rightWord.update(newWord);
 
         // Lets attempt to update the players location and find if it moved
         this.player.update(time, delta, "right");
