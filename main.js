@@ -153,7 +153,13 @@ class MainScene extends Phaser.Scene {
         alert("GAME OVER");
 
         // Check local highScore VS global
-        this.scene.get('MenuScene').updateHighScore(this.score);
+        if(this.score > globalHighScore) {
+          globalHighScore = this.score;
+          // Update the high score in local storage
+          localStorage.setItem('highScore', globalHighScore);
+        }
+        // Call the updateHighScore method to update the text
+        this.scene.get('MenuScene').updateHighScore(globalHighScore);
 
         this.scene.start('MenuScene'); // go to mainmenu
         
