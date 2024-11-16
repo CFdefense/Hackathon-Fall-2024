@@ -26,6 +26,8 @@ export class Player {
           newXPos = 291;
           this.position = "left";
           newDirection = true;
+        } else if (this.position === "left") {
+          newDirection = true;
         }
         break;
       case "right":
@@ -33,6 +35,8 @@ export class Player {
         if (this.position === "middle") {
           newXPos = 441;
           this.position = "right";
+          newDirection = true;
+        } else if (this.position === "right") {
           newDirection = true;
         }
         break;
@@ -63,6 +67,10 @@ let obstacleSpeed = 0.05;
 
 export function increaseSpeed() {
   obstacleSpeed += 0.01;
+}
+
+export function resetSpeed() {
+  obstacleSpeed = 0.01;
 }
 
 // Obstacle Sprite

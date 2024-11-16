@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { gameWindow, Player, Word, Obstacle, increaseSpeed} from './src/phaser/sprites';
+import { gameWindow, Player, Word, Obstacle, increaseSpeed, resetSpeed} from './src/phaser/sprites';
 
 class MenuScene extends Phaser.Scene {
   constructor() {
@@ -158,7 +158,7 @@ class MainScene extends Phaser.Scene {
         }
         // Call the updateHighScore method to update the text
         this.scene.get('MenuScene').updateHighScore(globalHighScore);
-
+        resetSpeed();
         this.scene.start('MenuScene'); // go to mainmenu
         
         return true;
@@ -214,7 +214,7 @@ class MainScene extends Phaser.Scene {
       // Lets attempt to update the players location and find if it moved
       let result = this.player.update(time, delta, "right");
 
-      if (result === true) {}
+      if (result === true) {
         console.log("right true");
         this.correctNoise.play();
 
@@ -225,9 +225,10 @@ class MainScene extends Phaser.Scene {
 
         // Increment Score
         this.score += 1;
-    } else {
-      this.wrongNoise.play();
-      console.log("Wrong")
+      } else {
+        this.wrongNoise.play();
+        console.log("Wrong")
+      }
     }
   }
 
