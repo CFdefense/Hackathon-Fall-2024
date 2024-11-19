@@ -1,6 +1,6 @@
 # Marist Hackathon Fall 2024 🏆 WINNER 🏆 - TypeDash
 
-Created by Chrisitan Farrell and Ryan Munger
+Created by Christian Farrell and Ryan Munger
 
 ## Installation
 1. Ensure you have node installed on your computer
