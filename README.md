@@ -2,13 +2,6 @@
 
 Created by Christian Farrell and Ryan Munger
 
-## Installation
-1. Ensure you have node installed on your computer
-2. `npm install` 
-3. `npm run dev`
-4. Go to localhost in the browser!
-5. Ensure you are in the right zoom level in your browser.
-
 ## About the Project
 This project was for the Marist Hackathon in the Fall of 2024. The theme was 'typing,' and we were given 12 hours to complete a fully-fledged project that would be judged. 
 
@@ -17,6 +10,13 @@ We decided to build a fun interactive game with roots in similar games such as S
 I decided to get some good experience in Javascript by developing this project solely using Javascript and the node package 'Phaser'. The project is hosted and runs via Vite.
 
 This project won first place during judging 🏆.
+
+## Installation
+1. Ensure you have node installed on your computer
+2. `npm install` 
+3. `npm run dev`
+4. Go to localhost in the browser!
+5. Ensure you are in the right zoom level in your browser.
 
 ## How to Play  
 1. You can type the word in the box (case insensitive) for the column you wish to move to.
